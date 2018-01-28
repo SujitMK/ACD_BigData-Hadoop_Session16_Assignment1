@@ -1,0 +1,39 @@
+scala> val list = sc.parallelize(List(1,2,3,4,5,6,7,8,9,10))
+list: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[0] at parallelize at <console>:27
+
+
+// TASK - 1
+
+scala> val sum = list.reduce((a,b)=>(a+b))
+sum: Int = 55
+
+// TASK - 2
+
+scala> val count = list.count()
+count: Long = 10
+
+// TASK - 3
+
+scala> val avg = sum / count
+avg: Long = 5
+
+scala> val avg:Float = sum / count
+avg: Float = 5.0
+
+// TASK - 4
+
+
+scala> val evenSum = list.filter(x -> (x%2 == 0)).reduce((a,b) => (a+b))
+<console>:29: error: not found: value x
+         val evenSum = list.filter(x -> (x%2 == 0)).reduce((a,b) => (a+b))
+                                   ^
+
+scala> val evenSum = list.filter(x => (x%2 == 0)).reduce((a,b) => (a+b))
+evenSum: Int = 30
+
+// TASK - 5
+
+scala> val div = list.filter( x => (x%5 == 0 && x%3 == 0)).count()
+div: Long = 0
+
+scala> 
